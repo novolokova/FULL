@@ -1,0 +1,12 @@
+POST http://localhost:3000/api/groups HTTP/1.1
+Content-Type: application/json
+
+{
+    "name":"group 7",
+    "userId": 6
+
+}
+
+# http://localhost:3000/api/groups - можна вписать user в теле зарпоса
+
+# http://localhost:3000/api/groups/users/*** - можна вписать user в строке зарпоса
