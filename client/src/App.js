@@ -1,25 +1,23 @@
-import React from "react";
-// import Counter from "./components/Counter";
-// import Todo from './components/Todo';
-import UsersSection from "./components/UsersSection";
-import UserForm from "./components/UserForm";
-
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import UserPage from './pages/UserPage';
+import GroupPage from './pages/GroupPage';
+import TaskPage from './pages/TaskPage';
+import NavMenu from './components/NavMenu';
 
 function App() {
-
   return (
-    // <>
-    //  <Counter/>
-    //  <hr/> <hr/> <hr/>
-    //  <Todo/>
-    // </>
-
-    <>
-    <UserForm/>
-   <UsersSection />
-    </>
+    <BrowserRouter>
+      <NavMenu />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/users" element={<UserPage />} />
+        <Route path="/groups" element={<GroupPage />} />
+        <Route path="/tasks" element={<TaskPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
 export default App;
- 
