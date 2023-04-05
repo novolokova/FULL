@@ -1,23 +1,42 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getAllUsers } from '../../store/usersSlice';
+import { getAllUsers, getAllUsersMore } from '../../store/usersSlice';
+import CONSTANTS from '../../constants';
 
 const UsersSection = (props) => {
+  const [amount, setAmount] = useState(CONSTANTS.MIN_LIMIT);
   const { users, error, isFetching } = useSelector((state) => state.users); // повертає частину нашого State
   const dispatch = useDispatch(); // створює dispatch (посильного)
   useEffect(() => {
-    // щоб можно було звернутися до сторонніх ефектів (приймає ф-ю і скільки раз її виконувати)
-    dispatch(getAllUsers({ page: 0 })); // page:0 - параметри
-  }, [dispatch]);
+    dispatch(getAllUsers({ offset: 0, limit: amount }));
+        // eslint-disable-next-line
+  }, [amount, dispatch]);
 
   return (
     <section>
       <h2>Users List</h2>
+      <p>
+        {CONSTANTS.AMOUNTS.map((item, i) => (
+          <button key={i} onClick={() => setAmount(item)}>
+            {item}
+          </button>
+        ))}
+      </p>
       {error && <h3>error</h3>}
       {isFetching && <h3>Loading...</h3>}
-      {users.map((user, i) => (
-        <article key={i}><h3>{user.firstName} {user.lastName}</h3></article>
+      {users.map((user) => (
+        <article key={user.id}>
+          <h3>
+            {user.firstName} {user.lastName}
+          </h3>
+        </article>
       ))}
+      <button
+        onClick={() => {dispatch(getAllUsersMore({ offset: users.lenght, limit: amount }));
+        }}
+      >
+        Load more
+      </button>
     </section>
   );
 };

@@ -4,7 +4,7 @@ import * as httpClient from '../api';
 //Middleware
 export const getAllUsers = createAsyncThunk(
   'users/getAllUsers', //використ. у  devTools - browser F12
-  async (params = {}, thunkAPI) => {
+  async (params={}, thunkAPI) => {
     try {
       // после обработки axios повертається {}-деструктур.
       const {
@@ -19,6 +19,26 @@ export const getAllUsers = createAsyncThunk(
     }
   }
 );
+
+
+export const getAllUsersMore = createAsyncThunk(
+  'users/getAllUsersMore', //використ. у  devTools - browser F12
+  async (params={}, thunkAPI) => {
+    try {
+      // после обработки axios повертається {}-деструктур.
+      const {
+        data: { data },
+      } = await httpClient.getUsers(params);
+      return data;
+      //  dispatch(loadUsers(data.results))
+    } catch (error) {
+      // payloadCreator documentation
+      const { rejectWithValue } = thunkAPI;
+      return rejectWithValue(error); 
+    }
+  }
+);
+
 
 export const createUser = createAsyncThunk(
   'users/createUser',
@@ -52,13 +72,27 @@ const usersSlice = createSlice({
     builder.addCase(getAllUsers.fulfilled, (state, action) => {
       state.error = null;
       state.isFetching = false;
-      state.users = action.payload;
+      state.users=action.payload;
     });
     builder.addCase(getAllUsers.rejected, (state, action) => {
       state.isFetching = false;
       state.error = action.payload;
     });
 
+    //****** ****************** */
+    builder.addCase(getAllUsersMore.pending, (state, action) => {
+      state.isFetching = true;
+      state.error = null;
+    });
+    builder.addCase(getAllUsersMore.fulfilled, (state, action) => {
+      state.error = null;
+      state.isFetching = false;
+      state.users.push(...action.payload);
+    });
+    builder.addCase(getAllUsersMore.rejected, (state, action) => {
+      state.isFetching = false;
+      state.error = action.payload;
+    });
     //*****  createUser  ****** */
     builder.addCase(createUser.pending, (state, action) => {
         state.isFetching = true;
@@ -75,6 +109,6 @@ const usersSlice = createSlice({
       });
   },
 });
-// const {loadUsers} = usersSlice.actions;
+
 
 export default usersSlice.reducer;

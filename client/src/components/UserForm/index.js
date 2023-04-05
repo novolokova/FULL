@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import {useDispatch} from 'react-redux'
 import { createUser } from '../../store/usersSlice';
@@ -17,7 +17,6 @@ const UserForm = () => {
  
 const dispatch = useDispatch();
   const onSubmit = (values, formikBag) => {
-    console.log('**********');
     console.log(values);
     dispatch(createUser(values))// закидуем в middlewar
       // formikBag.resetForm()
