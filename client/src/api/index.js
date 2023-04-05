@@ -8,6 +8,7 @@ const httpClient = axios.create({
 });
 
 //axios-запрос всегда возвращает promice => передается в userSlice(reduser) => Middleware(работает с посторонними эфектами) и dispatch(action) передается в userSlice - extraReducers и изменяется state (зв'язали  back i front)
+
 export const getUsers = ( options = {}) => {
   const defaultOptions = {
     limit: CONSTANTS.MIN_LIMIT,
