@@ -1,17 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import styles from './NavMenu.module.scss';
 
 const NavMenu = () => {
   return (
     <nav className={styles.nav}>
-      <Link to="/" className={styles.title}>
+      <NavLink to="/" className={styles.title}>
         Home Page
-      </Link>
+      </NavLink>
       <ul>
-        <Link to="/users">users</Link>
-        <Link to="/groups">groups</Link>
-        <Link to="/tasks">tasks</Link>
+        <NavLink to="/users">users</NavLink>
+        <NavLink to="/groups">groups</NavLink>
+        <NavLink to="/tasks">tasks</NavLink>
       </ul>
     </nav>
   );
