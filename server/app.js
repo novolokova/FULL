@@ -4,7 +4,7 @@ const { errorValidateHandle, errorHandle } = require('./middlewares/error.handle
 const router = require('./routes');
 
 const app = express();
-app.use(cors());
+app.use(cors());// ф-я которая позволяет делать запрос на другой порт Cross-Origin Resource Sharing (CORS)
 
 app.use(express.static('public'))// можливість працювати з статичними файлами (з папки public)
 app.use(express.json()); // Content-Type: application/json - если не пропишем в requests то этот метод не будет работать не сможет читать
