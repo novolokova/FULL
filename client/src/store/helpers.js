@@ -7,7 +7,7 @@ export const decarateAsyncThunk = ({type, thunk}) => {
       try {
         return await thunk(params);
       } catch (error) {
-        return rejectWithValue(error);
+        return rejectWithValue(error);// прокидуємо спец.фун.(rejectWithValue) далі в extraReducers до обробки помилки
       }
     }
   );
@@ -21,7 +21,7 @@ export const pendingReducer = (state, action) => {
   
   export const rejectedReducer = (state, action) => {
     state.isFetching = false;
-    state.error = action.payload;
+    state.error = action.payload;// прилетіла з Middleware для виводу її кліенту
   };
 
 //******************************* */

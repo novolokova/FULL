@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import {Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllUsers, getAllUsersMore } from '../../store/usersSlice';
 import CONSTANTS from '../../constants';
 
 const UsersSection = (props) => {
   const [amount, setAmount] = useState(CONSTANTS.MIN_LIMIT);
-  const { users, error, isFetching } = useSelector((state) => state.users); // повертає частину нашого State
+  const { users, error, isFetching } = useSelector((state) => state.users); // повертає частину нашого State-(initialState) з usersSlice
   const dispatch = useDispatch(); // створює dispatch (посильного)
-  useEffect(() => {
-    dispatch(getAllUsers({ offset: 0, limit: amount }));
-        // eslint-disable-next-line
+  useEffect(() => {// в компоненте сторонній еффект тільки через useEffect, щоб можна було звернутися
+    dispatch(getAllUsers({ offset: 0, limit: amount }));// только через dispatch можна змінити State, на пряму ніяк!!!
   }, [amount, dispatch]);
 
   return (
@@ -25,14 +25,16 @@ const UsersSection = (props) => {
       {error && <h3>error</h3>}
       {isFetching && <h3>Loading...</h3>}
       {users.map((user) => (
-        <article key={user.id}>
+        <article key={user.id} >
           <h3>
             {user.firstName} {user.lastName}
           </h3>
+          {/*запит зі слайсу, і отримувати потрібного юзера і записувати в стан  */}
+          <Link to={`/users/${user.id}`}>getOneUser</Link>
         </article>
       ))}
       <button
-        onClick={() => {dispatch(getAllUsersMore({ offset: users.lenght, limit: amount }));
+        onClick={() => {dispatch(getAllUsersMore({ offset: users.length, limit: amount }));
         }}
       >
         Load more
@@ -57,6 +59,7 @@ export default UsersSection;
 //   return (
 //     <section>
 //       <h2>Users List</h2>
+         //умовний рендер
 //       {error && <h3>Error!</h3>}
 //       {isFetching && <h3>Loading...</h3>}
 //       {users.map((user, i) => (

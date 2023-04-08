@@ -1,8 +1,10 @@
 import React from 'react';
-import { ErrorMessage, Field, Form, Formik } from 'formik';
+import {Link } from 'react-router-dom';
+import {  Field, Form, Formik } from 'formik';
 import {useDispatch} from 'react-redux'
 import { createUser } from '../../store/usersSlice';
 import styles from './UserForm.module.scss';
+
 
 const initialValues = {
   firstName: '',
@@ -18,10 +20,15 @@ const UserForm = () => {
 const dispatch = useDispatch();
   const onSubmit = (values, formikBag) => {
     console.log(values);
-    dispatch(createUser(values))// закидуем в middlewar
+    dispatch(createUser(values))// закидываем в middlewar данные
       // formikBag.resetForm()
   };
   return (
+
+    <>
+
+
+
     <Formik initialValues={initialValues} onSubmit={onSubmit}>
       <Form className={styles.fields}>
       {/* <Form style={{
@@ -37,10 +44,15 @@ const dispatch = useDispatch();
         <Field type="password" name="password" placeholder="password" />
         <Field type="date" name="birthday" placeholder="birthday" />
         <label> Are you male?</label> <Field type="checkbox" name="isMale" />
-        <button type="submit"> Edd new user</button>
+        {/* <Link to='/users'><button type="submit"> Edd new user</button></Link> */}
+        {/* после валидации, сообщить о успешном создании и перенести на страницу желательно этого юзера */}
+       <button type="submit"> Edd new user</button>
         {/* <ErrorMessage /> */}
       </Form>
     </Formik>
+
+    <p>после удачного заполнения формі должно редеректнуть на профиль єтого нового юзера</p>
+    </>
   );
 };
 

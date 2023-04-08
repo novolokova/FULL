@@ -25,7 +25,7 @@ const storage = multer.diskStorage({
 
 // ==> app.use('/api', router); ==> router.use('/groups', groupRouter);- 
 
-groupRouter.post('/', upload.single('img'), GroupController.createUserGroup);
+groupRouter.post('/', upload.single('image'), GroupController.createUserGroup);
 groupRouter.patch('/:idGroup/image', upload.single('image'), GroupController.addImageGroup);
 groupRouter.get('/users/:idUser', GroupController.getUserGroups);
 groupRouter.post('/:idGroup', GroupController.addUserToGroups);

@@ -3,8 +3,15 @@ const { Op } = require('sequelize'); // Operators
 const _ = require('lodash');
 const { User } = require('../models'); // db[model.name] = model ---властивість нашої db (саме таблиці "users"---таблиця в множені а модель в однині), робимо деструктурізацію
 
-const checkBody = (body)=>_.pick(body, ['firstName', 'lastName', 'email', 'password', 'birthday', 'isMale'])// захищає від непотрібних данних які можуть зіпсувати нащі данні в БД
-
+const checkBody = (body) =>
+  _.pick(body, [
+    'firstName',
+    'lastName',
+    'email',
+    'password',
+    'birthday',
+    'isMale',
+  ]); // захищає від непотрібних данних які можуть зіпсувати нащі данні в БД
 
 module.exports.createUser = async (req, res, next) => {
   try {
@@ -14,7 +21,7 @@ module.exports.createUser = async (req, res, next) => {
     if (!createdUser) {
       return next(createError(400, 'Check your data'));
     }
-    const userNew = await createdUser.get()
+    const userNew = await createdUser.get();
     userNew.password = undefined;
     res.status(201).send({ data: userNew });
   } catch (error) {
@@ -58,26 +65,24 @@ module.exports.getAllUsers = async (req, res, next) => {
   }
 };
 
-
 module.exports.getOneUserByPk = async (req, res, next) => {
   try {
     const {
       params: { idUser },
     } = req;
     const user = await User.findByPk(idUser, {
-      attributes:{
-        exclude: ['password']
-      }
+      attributes: {
+        exclude: ['password'],
+      },
     });
     if (!user) {
       return next(createError(404, 'User not found'));
     }
-       res.status(200).send({ data: user });
+    res.status(200).send({ data: user });
   } catch (error) {
     next(error);
   }
 };
-
 
 module.exports.deleteUser = async (req, res, next) => {
   //  1 variant
@@ -190,7 +195,6 @@ module.exports.updateUserInstance = async (req, res, next) => {
     next(error);
   }
 };
-
 
 // !!!!!!!!!!!!
 // JSON не може передавати функцію, символ, undefined

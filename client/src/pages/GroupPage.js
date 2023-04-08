@@ -1,10 +1,20 @@
 import React from 'react';
+import GroupForm from '../components/GroupForm';
+import ControlPanel from '../components/ControlPanel';
 
 const GroupPage = () => {
     return (
+        <>
         <div>
-            <h1>GroupPage</h1>
+             <GroupForm/> 
         </div>
+
+<p>єту панель потом убрать, показівать єту панель если зарегестрированню юзер </p>
+<ControlPanel/>
+
+  <div> просмотр всех Group и одного без аунтификации</div>
+
+</>
     );
 }
 

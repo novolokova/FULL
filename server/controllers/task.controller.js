@@ -1,4 +1,5 @@
 const createError = require('http-errors');
+const _ = require('lodash');
 const { Task } = require('../models');
 const { User } = require('../models');
 
@@ -16,7 +17,7 @@ const { User } = require('../models');
 //   return next(createError(404, 'User not ////found'));
 // }
 
-const checkBody = (body)=>_.pick(body, ['content', 'isDone', 'deadLine'])// захищає від непотрібних данних які можуть зіпсувати нащі данні в БД
+const checkBody = (body) => _.pick(body, ['content', 'isDone', 'deadLine']); // захищає від непотрібних данних які можуть зіпсувати нащі данні в БД
 
 module.exports.createTask = async (req, res, next) => {
   try {
@@ -79,7 +80,6 @@ module.exports.deleteAllUserTasks = async (req, res, next) => {
   }
 };
 
-
 module.exports.deleteTask = async (req, res, next) => {
   try {
     const {
@@ -94,7 +94,7 @@ module.exports.deleteTask = async (req, res, next) => {
 };
 
 module.exports.updateTask = async (req, res, next) => {
-   try {
+  try {
     const { body, taskInstance } = req;
     const values = checkBody(body);
     const taskUpdated = await taskInstance.update(values, {
