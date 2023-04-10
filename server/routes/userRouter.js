@@ -11,6 +11,6 @@ userRouter.get('/', paginate, UserController.getAllUsers);
 userRouter.get('/:idUser', UserController.getOneUserByPk); // don't use checkUser
 userRouter.delete('/:idUser', checkUser, UserController.deleteUser);
 userRouter.patch('/:idUser', UserController.updateUser); // don't use checkUser
-userRouter.patch('/instance/:idUser',checkUser,UserController.updateUserInstance);
+// userRouter.patch('/instance/:idUser',checkUser,UserController.updateUserInstance);
 
 module.exports = userRouter;

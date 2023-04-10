@@ -86,38 +86,38 @@ module.exports.getOneUserByPk = async (req, res, next) => {
 
 module.exports.deleteUser = async (req, res, next) => {
   //  1 variant
-  // try {
-  //   const {
-  //     params: { idUser },
-  //   } = req;
-  //   const userInstance = await User.findByPk(idUser);
-  //   //1.1 variant
-  //   // const deletedUser = await User.destroy({
-  //   //   where: {id: idUser} // *** однаковая запись
-  //   // })
-
-  //   // 1.2 variant - not use checkUser in useRouter
-  //   if (!userInstance) {
-  //     return next(createError(404, 'User not found'));
-  //   }
-  //   await userInstance.destroy();
-  //   userInstance.password = undefined;
-  //   res.status(200).send({ data: userInstance });
-  // } catch (error) {
-  //   next(error);
-  // }
-
-  //  2 variant
   try {
     const {
-      params: { userInstance },
+      params: { idUser },
     } = req;
+    const userInstance = await User.findByPk(idUser);
+    //1.1 variant
+    // const deletedUser = await User.destroy({
+    //   where: {id: idUser} // *** однаковая запись
+    // })
+
+    // 1.2 variant - not use checkUser in useRouter
+    if (!userInstance) {
+      return next(createError(404, 'User not found'));
+    }
     await userInstance.destroy();
     userInstance.password = undefined;
     res.status(200).send({ data: userInstance });
   } catch (error) {
     next(error);
   }
+
+  //  2 variant
+  // try {
+  //   const {
+  //     params: { userInstance },
+  //   } = req;
+  //   await userInstance.destroy();
+  //   userInstance.password = undefined;
+  //   res.status(200).send({ data: userInstance });
+  // } catch (error) {
+  //   next(error);
+  // }
 };
 
 // коли треба update-оновити декілька кортежів
