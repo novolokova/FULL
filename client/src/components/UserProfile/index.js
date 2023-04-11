@@ -1,12 +1,14 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getOneUser, deleteUser } from '../../store/usersSlice';
 import UpdateUserForm from '../UpdateUserForm';
 import Modal from '../Modal';
+import Error from '../Error';
+import Spinner from '../Spinner';
+import UserFullCard from '../UserFullCard';
 import styles from './UserProfile.module.scss';
-
 
 const UserProfile = () => {
   const [modalActive, setModalActive] = useState(false);
@@ -14,24 +16,20 @@ const UserProfile = () => {
   const { currentUser, error, isFetching } = useSelector(
     (state) => state.users
   );
-
+  const navigate = useNavigate();
   const { idUser } = useParams();
-
   const deleteUserAction = (idUser) => {
-    console.log(idUser)
     dispatch(deleteUser(idUser));
     setModalDelete(false);
-    window.location.replace('http://localhost:5000/users');
+    navigate('/users', { replace: true });
   };
 
-  const removeUser = (idUser) => {
-   
-    setModalDelete(true)
-    
+  const removeUser = () => {
+    setModalDelete(true);
   };
-  const cancel = ()=>{
-    setModalDelete(false)
-  }
+  const cancel = () => {
+    setModalDelete(false);
+  };
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -40,55 +38,46 @@ const UserProfile = () => {
 
   return (
     <>
-      {error && (
+      {error && <Error />}
+      {isFetching && <Spinner />}
+      {currentUser && (
         <>
-          <h3>User not faund</h3>
-          <Link to="/users">вернуться к списку </Link>
+          <section className={styles.container}>
+            <UserFullCard currentUser={currentUser} />
+            <div className={styles.containerBtn}>
+              <button onClick={removeUser} className={styles.btn}>
+                delete
+              </button>
+              <button
+                onClick={() => setModalActive(true)}
+                className={styles.btn}
+              >
+                update
+              </button>
+            </div>
+          </section>
+          <Modal active={modalActive} setActive={setModalActive}>
+            <UpdateUserForm
+              idUser={currentUser.id}
+              setActive={setModalActive}
+            />
+          </Modal>
+          <Modal active={modalDelete} setActive={setModalDelete}>
+            <section className={styles.modal}>
+              <p>Are you sure wanna delete this user ?</p>
+              <button
+                onClick={() => deleteUserAction(idUser)}
+                className={styles.btn}
+              >
+                Yes
+              </button>
+              <button onClick={cancel} className={styles.btn}>
+                No
+              </button>
+            </section>
+          </Modal>
         </>
       )}
-      {isFetching && <h3>Loading...</h3>}
-      {
-        // посмотреть в примерах как привьльно делать рендер
-        currentUser && (
-          <>
-            {/* вывести карточку          */}
-            <p>User ID: {currentUser.id}</p>
-            <p>
-              User name: {currentUser.firstName} {currentUser.lastName}
-            </p>
-            {currentUser.email}
-
-            <button
-              onClick={() => {
-                removeUser(currentUser.id);
-
-              }}
-            >
-              delete
-            </button>
-            
-            <button onClick={() => setModalActive(true)}>update</button>
-          
-            <Modal active={modalActive} setActive={setModalActive}>
-            <UpdateUserForm idUser={currentUser.id} setActive={setModalActive}/>
-            </Modal>
-
-            <Modal active={modalDelete} setActive={setModalDelete}>
-            <p>'Are you sure wanna delete this user ?'</p>
-            <button onClick={deleteUserAction}>Yes</button>
-            <button onClick={cancel}>No</button>
-            </Modal>
-
-
-
-
-
-
-
-
-          </>
-        )
-      }
     </>
   );
 };

@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { getAllUsers, getAllUsersMore } from '../../store/usersSlice';
-import CONSTANTS from '../../constants';
 import Spinner from '../Spinner';
 import Error from '../Error';
+import UserCard from '../UserCard';
+import CONSTANTS from '../../constants';
+import styles from './UsersSection.module.scss';
 
 const UsersSection = () => {
   const [amount, setAmount] = useState(CONSTANTS.MIN_LIMIT);
@@ -13,45 +15,45 @@ const UsersSection = () => {
   useEffect(() => {
     dispatch(getAllUsers({ offset: 0, limit: amount }));
   }, [amount, dispatch]);
-
-  return (
-    <section>
-      <div>
-        {/* вынести функцию */}
-        {CONSTANTS.AMOUNTS.map((item, i) => (
-          <button key={i} onClick={() => setAmount(item)}>
-            {item}
-          </button>
-        ))}
-      </div>
-      {error && <Error />}
-      {isFetching && <Spinner />}
-      {users && 
-        <>
-          <h2>Users List</h2>
-          {/* вынести функцию */}
-          {users.map((user) => (
-            <article key={user.id}>
-              <h3>
-                {user.firstName} {user.lastName}
-              </h3>            
-              <section>
-                <Link to={`/users/${user.id}`}> getOneUser</Link>               
-              </section>
-            </article>
-          ))}
-        </>
-      }
-
-      {/* вынести функцию */}
+  const getMoreUsers = () => {
+    dispatch(getAllUsersMore({ offset: users.length, limit: amount }));
+  };
+  const btnAmount = (setAmount) => {
+    return CONSTANTS.AMOUNTS.map((item, i) => (
       <button
+        key={i}
+        className={styles.btn}
         onClick={() => {
-          dispatch(getAllUsersMore({ offset: users.length, limit: amount }));
+          setAmount(item);
         }}
       >
-        Load more
+        {item}
       </button>
-    </section>
+    ));
+  };
+
+  const mapCards = (users, i) => <UserCard key={i} users={users} />;
+
+  return (
+    <>
+      {error && <Error />}
+      {isFetching && <Spinner />}
+      {users && (
+        <>
+          <div className={styles.linkWrap}>
+            <Link to="/users/form">ADDuser</Link>
+          </div>
+          <section className={styles.container}>
+            {btnAmount(setAmount)}
+            <h2 className={styles.title}>Users List</h2>
+            <article className={styles.list}>{users.map(mapCards)}</article>
+            <button className={styles.btn} onClick={getMoreUsers}>
+              Load more
+            </button>
+          </section>
+        </>
+      )}
+    </>
   );
 };
 

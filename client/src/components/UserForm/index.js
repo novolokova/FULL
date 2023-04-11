@@ -1,5 +1,6 @@
 import React from 'react';
 import { Field, Form, Formik } from 'formik';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { createUser } from '../../store/usersSlice';
 import styles from './UserForm.module.scss';
@@ -15,33 +16,58 @@ const initialValues = {
 
 const UserForm = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const onSubmit = (values, formikBag) => {
-    // console.log(values);
     dispatch(createUser(values));
-    window.location.replace(`http://localhost:5000/users`);
+    navigate('/users', { replace: true });
+    formikBag.resetForm();
   };
   return (
-    <>
+    <section className={styles.container}>
       <Formik initialValues={initialValues} onSubmit={onSubmit}>
         <Form className={styles.fields}>
-          {/* <Form style={{
-           display: 'flex',
-           flexDirection: 'column',
-           width: '400px',
-           margin: 'auto',
-           marginTop: '30px'
-      }}> */}
-          <Field type="text" name="firstName" placeholder="firstName" />
-          <Field type="text" name="lastName" placeholder="lastName" />
-          <Field type="email" name="email" placeholder="email" />
-          <Field type="password" name="password" placeholder="password" />
-          <Field type="date" name="birthday" placeholder="birthday" />
-          <label> Are you male?</label> <Field type="checkbox" name="isMale" />
-          <button type="submit"> Edd new user</button>
+          <Field
+            type="text"
+            name="firstName"
+            placeholder="firstName"
+            className={styles.field}
+          />
+          <Field
+            type="text"
+            name="lastName"
+            placeholder="lastName"
+            className={styles.field}
+          />
+          <Field
+            type="email"
+            name="email"
+            placeholder="email"
+            className={styles.field}
+          />
+          <Field
+            type="password"
+            name="password"
+            placeholder="password"
+            className={styles.field}
+          />
+          <Field
+            type="date"
+            name="birthday"
+            placeholder="birthday"
+            className={styles.field}
+          />
+          <span className={styles.field}>
+            <label> Are you male?</label>{' '}
+            <Field type="checkbox" name="isMale" />
+          </span>
+          <button type="submit" className={styles.submit}>
+            {' '}
+            Edd{' '}
+          </button>
           {/* <ErrorMessage /> */}
         </Form>
       </Formik>
-    </>
+    </section>
   );
 };
 
