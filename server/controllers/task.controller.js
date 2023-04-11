@@ -80,14 +80,14 @@ module.exports.deleteAllUserTasks = async (req, res, next) => {
   }
 };
 
-module.exports.deleteTask = async (req, res, next) => {
+module.exports.deleteUserTask = async (req, res, next) => {
   try {
-    const {
-      taskInstance,
-      params: { idTask },
-    } = req;
-    await taskInstance.destroy();
-    res.status(200).send(`Task id:${idTask} removed`);
+    const { taskInstance } = req;
+    const result = await taskInstance.destroy();
+    if (!result) {
+      throw new Error('bad request');
+    }
+    res.status(200).send({ data: taskInstance });
   } catch (error) {
     next(error);
   }
