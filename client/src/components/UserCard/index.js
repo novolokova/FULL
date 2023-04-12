@@ -1,5 +1,5 @@
 import React from 'react';
-// import {AcUnitIcon} from '@mui/icons-material';
+import {MoreHoriz} from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import styles from './UserCard.module.scss';
 
@@ -21,7 +21,7 @@ const UserCard = (props) => {
           {firstName}
           <br />
           {lastName}
-          <Link to={`/users/${id}`}> **** </Link>{' '}
+          <Link to={`/users/${id}`}> <MoreHoriz className={styles.more}/> </Link>{' '}
         </h3>
       </div>
     </div>

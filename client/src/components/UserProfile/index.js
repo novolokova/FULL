@@ -23,19 +23,16 @@ const UserProfile = () => {
     setModalDelete(false);
     navigate('/users', { replace: true });
   };
-
   const removeUser = () => {
     setModalDelete(true);
   };
   const cancel = () => {
     setModalDelete(false);
   };
-
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getOneUser(idUser));
   }, [idUser, dispatch]);
-
   return (
     <>
       {error && <Error />}
