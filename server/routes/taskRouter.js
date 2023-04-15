@@ -13,8 +13,11 @@ taskRouter.get('/', paginate, TaskController.getAllTasks);
 taskRouter.get('/users/:idUser', checkUser, paginate, TaskController.getUserTasks);
 taskRouter.get('/users/:idUser/:idTask', checkUser, checkTask, TaskController.getOneTask);
 taskRouter.delete('/users/:idUser', TaskController.deleteAllUserTasks);
-taskRouter.delete('/:idTask', checkTask, TaskController.deleteTask);
-
+taskRouter.delete('/users/:idUser/:idTask',
+    checkUser,
+    checkTask,
+    TaskController.deleteUserTask
+  );
 taskRouter.patch('/:idTask', checkTask, TaskController.updateTask);
 
 module.exports = taskRouter;

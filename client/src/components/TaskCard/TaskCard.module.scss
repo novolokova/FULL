@@ -1,0 +1,61 @@
+.container {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  align-content: space-around;
+  justify-content: space-around;
+  align-items: center;
+
+  width: 80%;
+  margin: auto;
+  margin-bottom: 10px;
+  background-color: #fff;
+  border: 2px solid rgb(21, 156, 156);
+  border-radius: 15px;
+}
+
+.content {
+  width: 250px;
+}
+
+.icon {
+  padding: 10px;
+  font-size: 2rem;
+  border-radius: 10px;
+  background-color: rgb(21, 156, 156);
+  color: #fff;
+}
+
+.btn {
+  padding: 3px 10px;
+  font-size: 2.2rem;
+  border-radius: 10px;
+  border: none;
+  background-color: rgb(21, 156, 156);
+  color: #fff;
+}
+
+.done {
+  padding: 10px;
+  font-size: 2rem;
+  border-radius: 50px;
+  color: #fff;
+  background-color: rgb(92, 219, 18);
+}
+
+.notDone {
+  padding: 10px;
+  font-size: 2rem;
+  border-radius: 50px;
+  color: #fff;
+  background-color: rgb(207, 28, 28);
+}
+.btnModal{
+  padding: 3px 10px;
+  margin: 15px;
+  font-size: 1.5rem;
+  border-radius: 10px;
+  border: none;
+  background-color: rgb(21, 156, 156);
+  color: #fff;
+}

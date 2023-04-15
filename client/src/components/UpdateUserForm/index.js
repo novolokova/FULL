@@ -6,13 +6,15 @@ import styles from './UpdateUserForm.module.scss';
 
 const UpdateUserForm = (props) => {
   const { idUser, setActive } = props;
-  const { currentUser:{firstName, lastName, birthday} } = useSelector((state) => state.users);
+  const {
+    currentUser: { firstName, lastName, birthday },
+  } = useSelector((state) => state.users);
   const dispatch = useDispatch();
   const onSubmit = (values, formikBag) => {
     setActive(false);
-    window.location.replace(`http://localhost:5000/users/${idUser}`);
     dispatch(updateUser({ values, idUser }));
     formikBag.resetForm();
+    window.location.replace(`http://localhost:5000/users/${idUser}`);
   };
   const initialValues = {
     firstName: `${firstName}`,

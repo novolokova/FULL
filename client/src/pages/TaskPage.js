@@ -1,16 +1,12 @@
 import React from 'react';
-import ControlPanel from '../components/ControlPanel';
+import TasksSection from '../components/TasksSection';
 
 const TaskPage = () => {
-    return (
-        <div>
-            <h1>TaskPage</h1>
-            <p>єту панель потом убрать, показівать єту панель если зарегестрированню юзер </p>
-      <ControlPanel/>
-    
-        <div> просмотр всех юзеров и одного без аунтификации</div>
-        </div>
-    );
-}
+  return (
+    <div>
+      <TasksSection />
+    </div>
+  );
+};
 
 export default TaskPage;

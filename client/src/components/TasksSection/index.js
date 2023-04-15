@@ -1,39 +1,43 @@
-import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getAllTasks } from '../../store/tasksSlice';
+import { getAllTasks, getAllTasksMore } from '../../store/tasksSlice';
+import SearchForm from '../SearchForm';
+import TaskCard from '../TaskCard';
+import Spinner from '../Spinner';
+import Error from '../Error';
 import CONSTANTS from '../../constants';
-
-
+import styles from './TasksSection.module.scss';
 
 const TasksSection = () => {
   const { tasks, error, isFetching } = useSelector((state) => state.tasks);
-
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getAllTasks({ offset: 0, limit: CONSTANTS.MIN_LIMIT }));
- 
+    dispatch(getAllTasks({ offset: 0, limit: CONSTANTS.MAX_LIMIT }));
   }, [dispatch]);
-
+  const mapTasks = (tasks, i) => <TaskCard key={i} tasks={tasks} />;
+  const getMoreUsers = () => {
+    dispatch(
+      getAllTasksMore({ offset: tasks.length, limit: CONSTANTS.MAX_LIMIT })
+    );
+  };
   return (
-    <section>
-      <h1>Tasks list</h1>
-      {error && <h3>error</h3>}
-      {isFetching && <h3>Loading...</h3>}
-      {tasks.map((task) => (
-        <article key={task.id}>
-          <h3>
-            {task.content}
-            {task.isDone === false ? 'NOT-isDone' : 'isDone'}
-            <p>author{task.userId}</p>
-          </h3>
-         { console.log(tasks)} 
-          <Link to={`/tasks/users/${task.userId}/${task.id}`}>getOneTask</Link>
-       
-        
-        </article>
-      ))}
-    </section>
+    <>
+      {error && <Error />}
+      {isFetching && <Spinner />}
+      {tasks && (
+        <>
+          <SearchForm />
+          <section className={styles.container}>
+            <h1 className={styles.title}>Tasks list</h1>
+            <div>{tasks.map(mapTasks)}</div>
+            <button className={styles.btn} onClick={getMoreUsers}>
+              Load more
+            </button>
+          </section>
+        </>
+      )}
+    </>
   );
 };
 

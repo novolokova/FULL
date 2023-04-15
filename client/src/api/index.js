@@ -1,16 +1,11 @@
 import axios from 'axios';
 import qs from 'query-string';
-import FormData from 'form-data'
+import FormData from 'form-data';
 import CONSTANTS from '../constants';
 
 const httpClient = axios.create({
-  // подключение к ресурсу для работы, запрос клиента за адресом сервера
   baseURL: 'http://localhost:3000/api',
 });
-
-//axios-запрос всегда возвращает promice => передается в userSlice(reduser) => Middleware(работает с посторонними эфектами) и dispatch(action)=> передается в userSlice - extraReducers и изменяется state (зв'язали  back i front)
-
-
 
 export const getUsers = (options = {}) => {
   const defaultOptions = {
@@ -23,18 +18,28 @@ export const getUsers = (options = {}) => {
   };
   return httpClient.get(`/users?${qs.stringify(readyOptions)}`);
 };
-
 export const postUser = (values) => httpClient.post('/users', values);
-
 export const getUser = (idUser) => httpClient.get(`/users/${idUser}`);
+export const patchUser = ({ idUser, values }) =>
+  httpClient.patch(`/users/${idUser}`, values);
+export const deleteUser = (idUser) => httpClient.delete(`/users/${idUser}`);
 
+// ***********Task*************
 
+export const postTask = ({ idUser, values }) =>
+  httpClient.post(`tasks/users/${idUser}`, values);
+export const getTasks = ({ limit, offset }) =>
+  httpClient.get(`/tasks?${qs.stringify({ limit, offset })}`);
+export const getTask = ({ idUser, idTask }) =>
+  httpClient.get(`/tasks/users/${idUser}/${idTask}`);
+export const getUserTasks = (idUser) =>
+  httpClient.get(`/tasks/users/${idUser}`);
+export const patchTask = ({ idTask, values }) =>
+  httpClient.patch(`/tasks/${idTask}`, values);
+export const deleteTask = ({ userId, id }) =>
+  httpClient.delete(`/tasks/users/${userId}/${id}`);
 
-
-
-
-
-
+// ***********Group*************
 
 export const postGroup = (values) => {
   // навчаємо axios приймати json з файлом(обгортаємо значення яке прийщлоз input = GroupForm)
