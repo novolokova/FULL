@@ -2,48 +2,40 @@ import { createSlice } from '@reduxjs/toolkit';
 import * as httpClient from '../api';
 import { decarateAsyncThunk, pendingReducer, rejectedReducer } from './helpers';
 
-//Middleware обробляє побіч.ефф. які впливають на State
 export const getAllUsers = decarateAsyncThunk({
-  type: 'users/getAllUsers', // назва для devTools-redux-F12
-  thunk: httpClient.getUsers, // берем из api axios-запрос
+  type: 'users/getAllUsers',
+  thunk: httpClient.getUsers,
 });
-
 export const getAllUsersMore = decarateAsyncThunk({
   type: 'users/getAllUsersMore',
   thunk: httpClient.getUsers,
 });
-
 export const createUser = decarateAsyncThunk({
   type: 'users/createUser',
   thunk: httpClient.postUser,
 });
-
 export const getOneUser = decarateAsyncThunk({
   type: 'users/getOneUser',
   thunk: httpClient.getUser,
 });
-
 export const updateUser = decarateAsyncThunk({
   type: 'users/patchUser',
   thunk: httpClient.patchUser,
 });
-
 export const deleteUser = decarateAsyncThunk({
   type: 'users/deleteUser',
   thunk: httpClient.deleteUser,
 });
-
 const usersSlice = createSlice({
-  name: 'users', // назва в rootReducer
+  name: 'users',
   initialState: {
-    users: [], // fulfilled(data)
-    error: null, // reject(error)
-    isFetching: false, //pending(loding)
-    currentUser: null, //getOneUser
+    users: [],
+    error: null,
+    isFetching: false,
+    currentUser: null,
   },
-  reducers: {},
 
-    //****** getAllUsers ************ */
+  //****** getAllUsers ************ */
   extraReducers: (builder) => {
     builder.addCase(getAllUsers.pending, pendingReducer);
     builder.addCase(getAllUsers.fulfilled, (state, action) => {
@@ -87,7 +79,6 @@ const usersSlice = createSlice({
     builder.addCase(createUser.rejected, rejectedReducer);
 
     // ***************getOneUser***********************
-
     builder.addCase(getOneUser.pending, pendingReducer);
     builder.addCase(getOneUser.fulfilled, (state, action) => {
       const {
@@ -112,16 +103,10 @@ const usersSlice = createSlice({
       state.error = null;
       state.isFetching = false;
 
-      
-
       // state.users = [...state.users].map((user)=>user.id === data.id?{...user, firstName: data.firstName, lastName: data.lastName, email: data.email, password: data.password, birthday: data.birthday, isMale: data.isMale}:user);
 
-        const index = state.users.findIndex(
-          (user) => user._id === data._id,
-      )
-      state.users[index] = data
-
-    
+      const index = state.users.findIndex((user) => user._id === data._id);
+      state.users[index] = data;
     });
     builder.addCase(updateUser.rejected, rejectedReducer);
 
@@ -145,4 +130,4 @@ const usersSlice = createSlice({
   },
 });
 
-export default usersSlice.reducer; // usersSlice.reducer - передаем до rootReducer
+export default usersSlice.reducer;

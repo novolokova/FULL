@@ -7,7 +7,9 @@ const NavMenu = () => {
     <nav className={styles.nav}>
       <ul>
         <li>
-          <NavLink to="/" className={styles.title}>Home Page</NavLink>
+          <NavLink to="/" className={styles.title}>
+            Home Page
+          </NavLink>
         </li>
         <li>
           <NavLink to="/users">users</NavLink>
@@ -19,7 +21,6 @@ const NavMenu = () => {
           <NavLink to="/tasks">tasks</NavLink>
         </li>
       </ul>
-      <div>сделать аутентификацию</div>
     </nav>
   );
 };

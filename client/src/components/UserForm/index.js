@@ -5,15 +5,6 @@ import { useDispatch } from 'react-redux';
 import { createUser } from '../../store/usersSlice';
 import styles from './UserForm.module.scss';
 
-const initialValues = {
-  firstName: '',
-  lastName: '',
-  email: '',
-  password: '',
-  birthday: '',
-  isMale: true,
-};
-
 const UserForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -21,6 +12,14 @@ const UserForm = () => {
     dispatch(createUser(values));
     navigate('/users', { replace: true });
     formikBag.resetForm();
+  };
+  const initialValues = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    birthday: '',
+    isMale: true,
   };
   return (
     <section className={styles.container}>
@@ -57,12 +56,11 @@ const UserForm = () => {
             className={styles.field}
           />
           <span className={styles.field}>
-            <label> Are you male?</label>{' '}
+            <label> Are you male?</label>
             <Field type="checkbox" name="isMale" />
           </span>
           <button type="submit" className={styles.submit}>
-            {' '}
-            Edd{' '}
+            Edd
           </button>
           {/* <ErrorMessage /> */}
         </Form>

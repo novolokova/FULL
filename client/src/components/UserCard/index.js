@@ -1,11 +1,13 @@
 import React from 'react';
-import {MoreHoriz} from '@mui/icons-material';
+import { MoreHoriz } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import styles from './UserCard.module.scss';
 
-
 const UserCard = (props) => {
-  const { users:{id, firstName, lastName, isMale}, i } = props;
+  const {
+    users: { id, firstName, lastName, isMale },
+    i,
+  } = props;
 
   return (
     <div key={i} className={styles.card}>
@@ -21,7 +23,9 @@ const UserCard = (props) => {
           {firstName}
           <br />
           {lastName}
-          <Link to={`/users/${id}`}> <MoreHoriz className={styles.more}/> </Link>{' '}
+          <Link to={`/users/${id}`}>
+            <MoreHoriz className={styles.more} />{' '}
+          </Link>
         </h3>
       </div>
     </div>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { PersonAddAlt } from '@mui/icons-material';
 import { getAllUsers, getAllUsersMore } from '../../store/usersSlice';
 import Spinner from '../Spinner';
 import Error from '../Error';
@@ -31,9 +32,7 @@ const UsersSection = () => {
       </button>
     ));
   };
-
   const mapCards = (users, i) => <UserCard key={i} users={users} />;
-
   return (
     <>
       {error && <Error />}
@@ -41,7 +40,9 @@ const UsersSection = () => {
       {users && (
         <>
           <div className={styles.linkWrap}>
-            <Link to="/users/form">ADDuser</Link>
+            <Link to="/users/form">
+              <PersonAddAlt className={styles.personAdd} />
+            </Link>
           </div>
           <section className={styles.container}>
             {btnAmount(setAmount)}
