@@ -102,9 +102,6 @@ const usersSlice = createSlice({
       } = action;
       state.error = null;
       state.isFetching = false;
-
-      // state.users = [...state.users].map((user)=>user.id === data.id?{...user, firstName: data.firstName, lastName: data.lastName, email: data.email, password: data.password, birthday: data.birthday, isMale: data.isMale}:user);
-
       const index = state.users.findIndex((user) => user._id === data._id);
       state.users[index] = data;
     });

@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { AddTask } from '@mui/icons-material';
 import { getUserListTasks } from '../../store/tasksSlice';
 import Spinner from '../Spinner';
 import Error from '../Error';
-import { AddTask } from '@mui/icons-material';
 import Modal from '../Modal';
 import TaskForm from '../TaskForm';
 import TaskCard from '../TaskCard';

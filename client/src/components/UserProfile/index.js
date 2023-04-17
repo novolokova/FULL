@@ -1,7 +1,8 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { Groups } from '@mui/icons-material';
 import { getOneUser, deleteUser } from '../../store/usersSlice';
 import UpdateUserForm from '../UpdateUserForm';
 import Modal from '../Modal';
@@ -51,6 +52,9 @@ const UserProfile = () => {
               >
                 update
               </button>
+              <Link to={`/groups/users/${idUser}`} className={styles.btn}>
+                <Groups className={styles.icon}/>
+              </Link>
             </div>
           </section>
           <Modal active={modalActive} setActive={setModalActive}>
