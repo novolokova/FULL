@@ -24,8 +24,6 @@ export const patchUser = ({ idUser, values }) =>
   httpClient.patch(`/users/${idUser}`, values);
 export const deleteUser = (idUser) => httpClient.delete(`/users/${idUser}`);
 
-// ***********Task*************
-
 export const postTask = ({ idUser, values }) =>
   httpClient.post(`tasks/users/${idUser}`, values);
 export const getTasks = ({ limit, offset }) =>
@@ -39,12 +37,8 @@ export const patchTask = ({ idTask, values }) =>
 export const deleteTask = ({ userId, id }) =>
   httpClient.delete(`/tasks/users/${userId}/${id}`);
 
-// ***********Group*************
-
 export const postGroup = (values) => {
-  // навчаємо axios приймати json з файлом(обгортаємо значення яке прийщлоз input = GroupForm)
   const formDataValues = new FormData();
-  //записується через forIn це утілітка, можна винести її 1:09 107/1
   formDataValues.append('name', values.name);
   formDataValues.append('userId', values.userId);
   formDataValues.append('image', values.image);
@@ -52,3 +46,10 @@ export const postGroup = (values) => {
     headers: { 'Content-Type': 'multipart/form-data' },
   });
 };
+export const getAllGroups = (idUser) => httpClient.get('/groups');
+export const getUserGroups = (idUser) =>
+  httpClient.get(`/groups/users/${idUser}`);
+  export const addUserToGroups = ({ idGroup, values }) =>
+  httpClient.post(`/groups/${idGroup}`, values);
+
+

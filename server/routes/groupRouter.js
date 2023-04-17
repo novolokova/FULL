@@ -3,6 +3,7 @@ const { Router } = require('express');
 const multer = require('multer');//Middleware module - express
 const groupRouter = Router();
 const GroupController = require('../controllers/group.controller');
+const paginate = require('../middlewares/paginate.mw');
 
 
 // const upload = multer({
@@ -22,11 +23,10 @@ const storage = multer.diskStorage({
   })
     const upload = multer({ storage })// Middleware-multer
 
-
 // ==> app.use('/api', router); ==> router.use('/groups', groupRouter);- 
-
 groupRouter.post('/', upload.single('image'), GroupController.createUserGroup);
 groupRouter.patch('/:idGroup/image', upload.single('image'), GroupController.addImageGroup);
+groupRouter.get('/', paginate, GroupController.getAllGroups);
 groupRouter.get('/users/:idUser', GroupController.getUserGroups);
 groupRouter.post('/:idGroup', GroupController.addUserToGroups);
 

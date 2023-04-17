@@ -1,0 +1,38 @@
+.card {
+  width: 200px;
+  height: 250px;
+  margin: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+}
+  .image {
+    width: 75%;
+    height: 75px;
+    margin: auto;
+    margin-top: 15px;
+    border: 1px solid rgb(21, 156, 156);
+    border-radius: 15px;
+  }
+
+  .container {
+    padding: 5px;
+  }
+  .iconContainer {
+    margin: 0 15px 0 15px;
+  }
+
+  .btn {
+    padding: 3px 10px;
+    float: right;
+    font-size: 2.2rem;
+    border-radius: 10px;
+    border: none;
+    background-color: rgb(21, 156, 156);
+    color: #fff;
+  }
+  .icon {
+    padding: 6px 0;
+    font-size: 2.2rem;
+  }
+

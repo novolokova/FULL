@@ -114,3 +114,18 @@ module.exports.addUserToGroups = async (req, res, next) => {
     next(error);
   }
 };
+
+module.exports.getAllGroups = async (req, res, next) => {
+  try {
+    const { paginate = {} } = req;
+    const group = await Group.findAll({
+      ...paginate
+    });
+    if (!group) {
+      return next(createError(404, 'Groups not found'));
+    }
+    res.status(200).send({ data: group });
+  } catch (error) {
+    next(error);
+  }
+};
