@@ -1,3 +1,8 @@
+// @use 'src/common/styles/colors' as color;
+@use "src/common/styles/templates" as *;
+// @use "src/common/styles/mixins" as mixin;
+// @use "src/common/styles/borders" as border;
+
 .container {
   display: flex;
   flex-wrap: nowrap;
@@ -58,4 +63,8 @@
   border: none;
   background-color: rgb(21, 156, 156);
   color: #fff;
+}
+
+span.tooltip {
+  @extend .tooltip;
 }

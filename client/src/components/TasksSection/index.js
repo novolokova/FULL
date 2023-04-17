@@ -6,7 +6,7 @@ import SearchForm from '../SearchForm';
 import TaskCard from '../TaskCard';
 import Spinner from '../Spinner';
 import Error from '../Error';
-import CONSTANTS from '../../constants';
+import {CONSTANTS} from '../../constants';
 import styles from './TasksSection.module.scss';
 
 const TasksSection = () => {

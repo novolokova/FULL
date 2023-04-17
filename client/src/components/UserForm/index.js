@@ -1,8 +1,9 @@
 import React from 'react';
-import { Field, Form, Formik } from 'formik';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { createUser } from '../../store/usersSlice';
+import { USER_FORM_SCHEMA } from '../../utils/validationSchemas';
 import styles from './UserForm.module.scss';
 
 const UserForm = () => {
@@ -23,7 +24,11 @@ const UserForm = () => {
   };
   return (
     <section className={styles.container}>
-      <Formik initialValues={initialValues} onSubmit={onSubmit}>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={onSubmit}
+        validationSchema={USER_FORM_SCHEMA}
+      >
         <Form className={styles.fields}>
           <Field
             type="text"
@@ -31,11 +36,21 @@ const UserForm = () => {
             placeholder="firstName"
             className={styles.field}
           />
+          <ErrorMessage
+            name="firstName"
+            component="span"
+            className={styles.spanError}
+          />
           <Field
             type="text"
             name="lastName"
             placeholder="lastName"
             className={styles.field}
+          />
+          <ErrorMessage
+            name="lastName"
+            component="span"
+            className={styles.spanError}
           />
           <Field
             type="email"
@@ -43,11 +58,21 @@ const UserForm = () => {
             placeholder="email"
             className={styles.field}
           />
+          <ErrorMessage
+            name="email"
+            component="span"
+            className={styles.spanError}
+          />
           <Field
             type="password"
             name="password"
             placeholder="password"
             className={styles.field}
+          />
+          <ErrorMessage
+            name="password"
+            component="span"
+            className={styles.spanError}
           />
           <Field
             type="date"
@@ -62,7 +87,6 @@ const UserForm = () => {
           <button type="submit" className={styles.submit}>
             Edd
           </button>
-          {/* <ErrorMessage /> */}
         </Form>
       </Formik>
     </section>

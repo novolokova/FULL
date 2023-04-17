@@ -20,7 +20,7 @@ const AddToGroupForm = (props) => {
       <Formik initialValues={initialValues} onSubmit={onSubmit}>
         <Form className={styles.fields}>
           <Field
-            type="text"
+            type="number"
             name="userId"
             placeholder="id user"
             className={styles.field}
@@ -28,7 +28,6 @@ const AddToGroupForm = (props) => {
           <button type="submit" className={styles.submit}>
             Edd group
           </button>
-          {/* <ErrorMessage /> */}
         </Form>
       </Formik>
     </section>

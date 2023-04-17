@@ -6,7 +6,7 @@ import { getAllUsers, getAllUsersMore } from '../../store/usersSlice';
 import Spinner from '../Spinner';
 import Error from '../Error';
 import UserCard from '../UserCard';
-import CONSTANTS from '../../constants';
+import {CONSTANTS} from '../../constants';
 import styles from './UsersSection.module.scss';
 
 const UsersSection = () => {

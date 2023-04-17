@@ -1,10 +1,11 @@
 import axios from 'axios';
 import qs from 'query-string';
 import FormData from 'form-data';
-import CONSTANTS from '../constants';
+import { REQUEST_DATA, CONSTANTS } from '../constants';
 
+const { PORT_SERVER, HOST, MAIN_URL } = REQUEST_DATA;
 const httpClient = axios.create({
-  baseURL: 'http://localhost:3000/api',
+  baseURL: `${HOST}:${PORT_SERVER}/${MAIN_URL}`,
 });
 
 export const getUsers = (options = {}) => {
@@ -49,7 +50,5 @@ export const postGroup = (values) => {
 export const getAllGroups = (idUser) => httpClient.get('/groups');
 export const getUserGroups = (idUser) =>
   httpClient.get(`/groups/users/${idUser}`);
-  export const addUserToGroups = ({ idGroup, values }) =>
+export const addUserToGroups = ({ idGroup, values }) =>
   httpClient.post(`/groups/${idGroup}`, values);
-
-

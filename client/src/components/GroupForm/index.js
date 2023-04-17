@@ -1,16 +1,15 @@
 import React from 'react';
-import { Field, Form, Formik } from 'formik';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { useDispatch } from 'react-redux';
 import { createGroup } from '../../store/groupsSlice';
 import styles from './GroupForm.module.scss';
+import { GROUP_SCHEMA } from '../../utils/validationSchemas';
 
 const GroupForm = (props) => {
   const { setActive } = props;
   const dispatch = useDispatch();
   const onSubmit = (values, formikBag) => {
     values.userId = 1;
-    //1 -> state.authUser.id повинні знати, окремий стейт для зареестрованого користувача, створити в сторі окремий слайс для авторизованого юзера, перевірили його і він може щось робити і знаемо його userId і вже зможемо робити від його імені запити...
-    // console.log(values);
     dispatch(createGroup(values));
     setActive(false);
     formikBag.resetForm();
@@ -21,11 +20,12 @@ const GroupForm = (props) => {
   };
   return (
     <section className={styles.container}>
-      <Formik initialValues={initialValues} onSubmit={onSubmit}>
+      <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={GROUP_SCHEMA}>
         {(formikProps) => {
           return (
             <Form className={styles.fields}>
               <Field type="text" name="name" placeholder="name" />
+              <ErrorMessage name="name" component="span" className={styles.spanError}/>
               <label>
                 <input
                   type="file"

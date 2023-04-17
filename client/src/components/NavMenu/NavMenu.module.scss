@@ -1,8 +1,5 @@
 .nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: stretch;
-  padding: 0 10px;
+  padding: 10px 15px;
   background-color: #333;
   color: white;
 }
@@ -19,13 +16,11 @@
 }
 
 .nav a {
-  display: flex;
-  align-items: center;
-  padding: 10px;
+  padding: 20px;
   color: inherit;
   text-decoration: none;
- text-transform: uppercase;
-  &:hover{
-    background-color: rgba(255,255,255,0.3)
-   }
+  text-transform: uppercase;
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+  }
 }

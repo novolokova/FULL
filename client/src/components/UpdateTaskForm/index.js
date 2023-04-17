@@ -1,11 +1,17 @@
 import React from 'react';
-import { Field, Form, Formik } from 'formik';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { updateTask } from '../../store/tasksSlice';
 import styles from './UpdateTaskForm.module.scss';
+import { CONTENT_SCHEMA } from '../../utils/validationSchemas';
 
-const UpdateTaskForm = () => {
+const initialValues = {
+  content: '',
+  isDone: false,
+};
+
+const UpdateTaskForm = (props) => {
   const { idTask } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -14,28 +20,37 @@ const UpdateTaskForm = () => {
     formikBag.resetForm();
     navigate('/tasks', { replace: true });
   };
-  const initialValues = {
-    content: '',
-    isDone: false,
-  };
   return (
     <section className={styles.container}>
-      <Formik initialValues={initialValues} onSubmit={onSubmit}>
-        <Form className={styles.fields}>
-          <Field
-            type="text"
-            name="content"
-            placeholder="content"
-            className={styles.field}
-          />
-          <span className={styles.field}>
-            <label> Task done?</label> <Field type="checkbox" name="isDone" />
-          </span>
-          <button type="submit" className={styles.submit}>
-            Update
-          </button>
-          {/* <ErrorMessage /> */}
-        </Form>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={onSubmit}
+        validationSchema={CONTENT_SCHEMA}
+      >
+        {(formikProps) => {
+          return (
+            <Form className={styles.fields}>
+              <Field
+                type="text"
+                name="content"
+                placeholder="content"
+                className={styles.field}
+              />
+              <ErrorMessage
+                name="content"
+                component="span"
+                className={styles.spanError}
+              />
+              <span className={styles.field}>
+                <label> Task done?</label>
+                <Field type="checkbox" name="isDone" />
+              </span>
+              <button type="submit" className={styles.submit}>
+                Update
+              </button>
+            </Form>
+          );
+        }}
       </Formik>
     </section>
   );

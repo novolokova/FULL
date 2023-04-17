@@ -1,7 +1,8 @@
 import React from 'react';
-import { Field, Form, Formik } from 'formik';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { useDispatch } from 'react-redux';
 import { createTask } from '../../store/tasksSlice';
+import { CONTENT_SCHEMA } from '../../utils/validationSchemas';
 import styles from './TaskForm.module.scss';
 
 const TaskForm = (props) => {
@@ -18,7 +19,11 @@ const TaskForm = (props) => {
   };
   return (
     <section className={styles.container}>
-      <Formik initialValues={initialValues} onSubmit={onSubmit}>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={onSubmit}
+        validationSchema={CONTENT_SCHEMA}
+      >
         <Form className={styles.fields}>
           <Field
             type="text"
@@ -26,10 +31,14 @@ const TaskForm = (props) => {
             placeholder="content"
             className={styles.field}
           />
+          <ErrorMessage
+            name="content"
+            component="span"
+            className={styles.spanError}
+          />
           <button type="submit" className={styles.submit}>
             Edd task
           </button>
-          {/* <ErrorMessage /> */}
         </Form>
       </Formik>
     </section>

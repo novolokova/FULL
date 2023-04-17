@@ -2,6 +2,7 @@ import React from 'react';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateUser } from '../../store/usersSlice';
+import { UPDATE_SCHEMA } from '../../utils/validationSchemas';
 import styles from './UpdateUserForm.module.scss';
 
 const UpdateUserForm = (props) => {
@@ -24,7 +25,11 @@ const UpdateUserForm = (props) => {
   };
   return (
     <>
-      <Formik initialValues={initialValues} onSubmit={onSubmit}>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={onSubmit}
+        validationSchema={UPDATE_SCHEMA}
+      >
         <Form className={styles.fields}>
           <Field
             type="text"
@@ -32,11 +37,21 @@ const UpdateUserForm = (props) => {
             placeholder="firstName"
             className={styles.field}
           />
+          <ErrorMessage
+            name="firstName"
+            component="span"
+            className={styles.spanError}
+          />
           <Field
             type="text"
             name="lastName"
             placeholder="lastName"
             className={styles.field}
+          />
+          <ErrorMessage
+            name="lastName"
+            component="span"
+            className={styles.spanError}
           />
           <Field
             type="date"
@@ -50,7 +65,6 @@ const UpdateUserForm = (props) => {
           <button type="submit" className={styles.submit}>
             update
           </button>
-          {/* <ErrorMessage /> */}
         </Form>
       </Formik>
     </>
