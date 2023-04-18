@@ -1,32 +1,39 @@
+@use 'src/common/styles/colors' as color;
+@use 'src/common/styles/borders' as border;
+@use 'src/common/styles/mixins' as mixin;
+
 .container {
-    width: 75%;
-    padding: 20px;
-    margin: auto;
-    text-align: center;
-    background-color: rgb(166, 211, 211);
-  }
-  
-  .fields {
-    display: flex;
-    flex-direction: column;
-    width: 400px;
-    margin: auto;
-    margin-top: 30px;
-  }
-  
-  .field {
-    padding: 5px;
-    margin: 5px 0;
-    border-radius: 5px;
-  }
-  
-  .submit {
-    padding: 7px;
-    margin: 10px 0;
-    border-radius: 5px;
-    font-weight: 600;
-    color: #fff;
-    background-color: rgb(21, 156, 156);
-    text-transform: uppercase;
-  }
-  
+  @include mixin.container-style(
+    75%,
+    auto,
+    0,
+    0,
+    center,
+    color.$color-light-teal
+  );
+  padding: 20px;
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  margin: auto;
+  margin-top: 30px;
+}
+
+.field {
+  padding: 5px;
+  margin: 5px 0;
+  border-radius: border.$b-Radius-5;
+}
+
+.submit {
+  padding: 7px;
+  margin: 10px 0;
+  border-radius: border.$b-Radius-5;
+  font-weight: 600;
+  color: color.$color-white;
+  background-color: color.$color-teal;
+  text-transform: uppercase;
+}

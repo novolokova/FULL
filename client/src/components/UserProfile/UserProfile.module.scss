@@ -1,10 +1,17 @@
+@use 'src/common/styles/colors' as color;
+@use 'src/common/styles/borders' as border;
+@use 'src/common/styles/mixins' as mixin;
+
 .container {
-  width: 50%;
+  @include mixin.container-style(
+    50%,
+    auto,
+    20px,
+    border.$b-Radius-15,
+    center,
+    color.$color-light-teal
+  );
   padding: 30px;
-  margin: auto;
-  margin-top: 20px;
-  text-align: center;
-  background-color: rgb(153, 208, 218);
 }
 
 .containerBtn {
@@ -15,9 +22,9 @@
   padding: 8px 16px;
   margin: 5px;
   border: 0;
-  border-radius: 5px;
-  background-color: #4676d7;
-  color: #fff;
+  border-radius: border.$b-Radius-5;
+  background-color: color.$color-medium-blue;
+  color: color.$color-white;
   font-size: 16px;
 }
 

@@ -1,42 +1,38 @@
+@use 'src/common/styles/colors' as color;
+@use 'src/common/styles/borders' as border;
+@use 'src/common/styles/mixins' as mixin;
+
 .container {
   display: flex;
   flex-wrap: nowrap;
   flex-direction: column;
   align-items: center;
 
-  width: 50%;
+  @include mixin.container-style(
+    50%,
+    auto,
+    30px,
+    border.$b-Radius-15,
+    center,
+    color.$color-light-teal
+  );
   padding: 15px;
-  margin: auto;
-  margin-top: 30px;
-
-  background-color: rgb(35, 177, 177);
-  border: 2px solid rgb(21, 156, 156);
-  border-radius: 15px;
-  text-align: center;
-
+  @include mixin.border-style(2px, color.$color-teal, solid);
   p {
     width: 70%;
     padding: 10px;
     text-align: left;
     margin: 10px;
-    border: 2px solid rgb(21, 156, 156);
-    border-radius: 15px;
-    background-color: #fff;
+    @include mixin.border-style(2px, color.$color-teal, solid);
+    border-radius: border.$b-Radius-15;
+    background-color: color.$color-white;
   }
 }
 
 .done {
-  padding: 10px;
-  font-size: 2rem;
-  border-radius: 50px;
-  color: #fff;
-  background-color: rgb(92, 219, 18);
+  @include mixin.icon-style(10px, 50px, 2rem, color.$color-white, color.$color-green);
 }
 
 .notDone {
-  padding: 10px;
-  font-size: 2rem;
-  border-radius: 50px;
-  color: #fff;
-  background-color: rgb(207, 28, 28);
+  @include mixin.icon-style(10px, 50px, 2rem, color.$color-white, color.$error-color);
 }

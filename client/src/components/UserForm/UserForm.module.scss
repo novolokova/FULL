@@ -1,11 +1,18 @@
+@use 'src/common/styles/colors' as color;
+@use 'src/common/styles/templates' as *;
+@use 'src/common/styles/borders' as border;
+@use 'src/common/styles/mixins' as mixin;
+
 .container {
-  width: 50%;
+  @include mixin.container-style(
+    50%,
+    auto,
+    30px,
+    border.$b-Radius-15,
+    center,
+    color.$color-light-teal
+  );
   padding: 20px;
-  margin: auto;
-  margin-top: 30px;
-  border-radius: 15px;
-  text-align: center;
-  background-color: #becce9;
 }
 
 .fields {
@@ -19,19 +26,19 @@
 .field {
   padding: 5px;
   margin: 5px 0;
-  border-radius: 5px;
+  border-radius: border.$b-Radius-5;
 }
 
 .submit {
   padding: 7px;
   margin: 10px 0;
-  border-radius: 5px;
-  color: aliceblue;
+  border-radius: border.$b-Radius-5;
+  color: color.$color-white;
   font-weight: 600;
-  background-color: #4676d7;
+  background-color: color.$color-medium-blue;
   text-transform: uppercase;
 }
-.spanError{
-  color: red;
-  
+
+.spanError {
+  @extend .spanError;
 }

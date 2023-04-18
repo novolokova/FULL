@@ -1,0 +1,41 @@
+@mixin border-style($size, $color, $style) {
+  border: {
+    width: $size;
+    color: $color;
+    style: $style;
+  }
+};
+
+@mixin container-style(
+  $width,
+  $margin,
+  $margin-top,
+  $border-radius,
+  $text-align,
+  $background-color
+) {
+  width: $width;
+  margin: $margin;
+  margin-top: $margin-top;
+  border-radius: $border-radius;
+  text-align: $text-align;
+  background-color: $background-color;
+};
+
+@mixin icon-style(
+  $padding,
+  $border-radius,
+  $font-size,
+  $color,
+  $background-color
+) {
+  padding: $padding;
+  border-radius: $border-radius;
+  font-size: $font-size;
+  color: $color;
+  background-color: $background-color;
+};
+
+//  @include mixin.border-style(4px, color.$error-color, solid);
+
+//  @use "src/common/styles/mixins" as mixin;

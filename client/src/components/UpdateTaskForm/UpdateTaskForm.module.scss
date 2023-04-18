@@ -1,40 +1,42 @@
-// @use 'src/common/styles/colors' as color;
-@use "src/common/styles/templates" as *;
-// @use "src/common/styles/mixins" as mixin;
-// @use "src/common/styles/borders" as border;
+@use 'src/common/styles/colors' as color;
+@use 'src/common/styles/templates' as *;
+@use 'src/common/styles/mixins' as mixin;
+@use 'src/common/styles/borders' as border;
 
 .container {
-    width: 50%;
-    padding: 20px;
-    margin: auto;
-    margin-top: 30px;
-    text-align: center;
-    background-color: #becce9;
-  }
-  
-  .fields {
-    display: flex;
-    flex-direction: column;
-    width: 400px;
-    margin: auto;
-    margin-top: 30px;
-  }
-  .field {
-    padding: 5px;
-    margin: 5px 0;
-    border-radius: 5px;
-  }
-  
-  .submit {
-    padding: 7px;
-    margin: 10px 0;
-    border-radius: 5px;
-    color: aliceblue;
-    font-weight: 600;
-    background-color: #4676d7;
-    text-transform: uppercase;
-  }
-  .spanError{
-    color: red;
-    
-  }
+  @include mixin.container-style(
+    50%,
+    auto,
+    30px,
+    border.$b-Radius-15,
+    center,
+    color.$color-light-teal
+  );
+  padding: 20px;
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  margin: auto;
+  margin-top: 30px;
+}
+.field {
+  padding: 5px;
+  margin: 5px 0;
+  border-radius: border.$b-Radius-5;
+}
+
+.submit {
+  padding: 7px;
+  margin: 10px 0;
+  border-radius: border.$b-Radius-5;
+  color: color.$color-white;
+  font-weight: 600;
+  background-color: color.$color-medium-blue;
+  text-transform: uppercase;
+}
+.spanError {
+  @extend .spanError;
+}
