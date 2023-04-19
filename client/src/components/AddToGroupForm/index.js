@@ -26,7 +26,7 @@ const AddToGroupForm = (props) => {
             className={styles.field}
           />
           <button type="submit" className={styles.submit}>
-            Edd group
+            Edd to group
           </button>
         </Form>
       </Formik>

@@ -11,7 +11,10 @@ import {
 } from '@mui/icons-material';
 import { deleteTask } from '../../store/tasksSlice';
 import Modal from '../Modal';
+import { REQUEST_DATA } from '../../constants';
 import styles from './TaskCard.module.scss';
+
+const { PORT_CLIENT, HOST } = REQUEST_DATA;
 
 const TaskCard = (props) => {
   const {
@@ -23,7 +26,7 @@ const TaskCard = (props) => {
   const deleteTasksAction = (userId, id) => {
     dispatch(deleteTask({ userId, id }));
     setModalDelete(false);
-    window.location.replace('http://localhost:5000/tasks');
+    window.location.replace(`${HOST}:${PORT_CLIENT}/tasks`);
   };
   const removeTask = () => {
     setModalDelete(true);

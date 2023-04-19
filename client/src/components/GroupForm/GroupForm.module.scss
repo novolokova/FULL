@@ -1,7 +1,7 @@
 @use 'src/common/styles/colors' as color;
-@use 'src/common/styles/templates' as *;
 @use "src/common/styles/borders" as border;
 @use "src/common/styles/mixins" as mixin;
+@use 'src/common/styles/templates' as *;
 
 .container {
   @include mixin.container-style(75%, auto, 10px, border.$b-Radius-15, center, color.$color-light-teal);

@@ -2,7 +2,6 @@ import { createSlice } from '@reduxjs/toolkit';
 import * as httpClient from '../api';
 import { decarateAsyncThunk, pendingReducer, rejectedReducer } from './helpers';
 
-
 export const createTask = decarateAsyncThunk({
   type: 'tasks/createTask',
   thunk: httpClient.postTask,
@@ -39,18 +38,16 @@ export const deleteTask = decarateAsyncThunk({
 });
 
 const tasksSlice = createSlice({
-  name: 'tasks', 
+  name: 'tasks',
   initialState: {
-    tasks: [], 
+    tasks: [],
     error: null,
-    isFetching: false, 
-    currentTask: null, 
+    isFetching: false,
+    currentTask: null,
     userListTask: null,
   },
- 
-  extraReducers: (builder) => {
 
-    // ***************createTask***********************
+  extraReducers: (builder) => {
     builder.addCase(createTask.pending, pendingReducer);
     builder.addCase(createTask.fulfilled, (state, action) => {
       const {
@@ -64,7 +61,6 @@ const tasksSlice = createSlice({
     });
     builder.addCase(createTask.rejected, rejectedReducer);
 
-    // ***************getAllTasks***********************
     builder.addCase(getAllTasks.pending, pendingReducer);
     builder.addCase(getAllTasks.fulfilled, (state, action) => {
       const {
@@ -78,23 +74,19 @@ const tasksSlice = createSlice({
     });
     builder.addCase(getAllTasks.rejected, rejectedReducer);
 
+    builder.addCase(getAllTasksMore.pending, pendingReducer);
+    builder.addCase(getAllTasksMore.fulfilled, (state, action) => {
+      const {
+        payload: {
+          data: { data },
+        },
+      } = action;
+      state.error = null;
+      state.isFetching = false;
+      state.tasks.push(...data);
+    });
+    builder.addCase(getAllTasksMore.rejected, rejectedReducer);
 
- //****** getAllTasksMore ************ */
- builder.addCase(getAllTasksMore.pending, pendingReducer);
- builder.addCase(getAllTasksMore.fulfilled, (state, action) => {
-   const {
-     payload: {
-       data: { data },
-     },
-   } = action;
-   state.error = null;
-   state.isFetching = false;
-   state.tasks.push(...data);
- });
- builder.addCase(getAllTasksMore.rejected, rejectedReducer);
-
-
-    // ***************getOneTask***********************
     builder.addCase(getOneTask.pending, pendingReducer);
     builder.addCase(getOneTask.fulfilled, (state, action) => {
       const {
@@ -108,7 +100,6 @@ const tasksSlice = createSlice({
     });
     builder.addCase(getOneTask.rejected, rejectedReducer);
 
-    //****** updateTask ************ */
     builder.addCase(updateTask.pending, pendingReducer);
     builder.addCase(updateTask.fulfilled, (state, action) => {
       const {
@@ -123,8 +114,7 @@ const tasksSlice = createSlice({
     });
     builder.addCase(updateTask.rejected, rejectedReducer);
 
-//***************getUserTasks************ */
-builder.addCase(getUserListTasks.pending, pendingReducer);
+    builder.addCase(getUserListTasks.pending, pendingReducer);
     builder.addCase(getUserListTasks.fulfilled, (state, action) => {
       const {
         payload: {
@@ -137,8 +127,6 @@ builder.addCase(getUserListTasks.pending, pendingReducer);
     });
     builder.addCase(getUserListTasks.rejected, rejectedReducer);
 
-
-    //****** deleteTask ************ */
     builder.addCase(deleteTask.pending, pendingReducer);
     builder.addCase(deleteTask.fulfilled, (state, action) => {
       const {
@@ -151,8 +139,6 @@ builder.addCase(getUserListTasks.pending, pendingReducer);
       state.tasks = state.tasks.filter((task) => task._id !== data._id);
     });
     builder.addCase(deleteTask.rejected, rejectedReducer);
-
-   
   },
 });
 

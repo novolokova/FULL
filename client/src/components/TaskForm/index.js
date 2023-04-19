@@ -3,7 +3,10 @@ import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { useDispatch } from 'react-redux';
 import { createTask } from '../../store/tasksSlice';
 import { CONTENT_SCHEMA } from '../../utils/validationSchemas';
+import { REQUEST_DATA } from '../../constants';
 import styles from './TaskForm.module.scss';
+
+const { PORT_CLIENT, HOST } = REQUEST_DATA;
 
 const TaskForm = (props) => {
   const { idUser, setActive } = props;
@@ -12,7 +15,7 @@ const TaskForm = (props) => {
     dispatch(createTask({ idUser, values }));
     setActive(false);
     formikBag.resetForm();
-    window.location.replace(`http://localhost:5000/tasks/users/${idUser}`);
+    window.location.replace(`${HOST}:${PORT_CLIENT}/tasks/users/${idUser}`);
   };
   const initialValues = {
     content: '',

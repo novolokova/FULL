@@ -10,7 +10,6 @@ const paginate = require('../middlewares/paginate.mw');
 //     dest:path.resolve(__dirname, '../public/images') // шлях
 // })
 
-
 // обробляємо, щоб прилітав в певному вигляді 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -25,9 +24,9 @@ const storage = multer.diskStorage({
 
 // ==> app.use('/api', router); ==> router.use('/groups', groupRouter);- 
 groupRouter.post('/', upload.single('image'), GroupController.createUserGroup);
-groupRouter.patch('/:idGroup/image', upload.single('image'), GroupController.addImageGroup);
+groupRouter.post('/:idGroup', GroupController.addUserToGroups);
 groupRouter.get('/', paginate, GroupController.getAllGroups);
 groupRouter.get('/users/:idUser', GroupController.getUserGroups);
-groupRouter.post('/:idGroup', GroupController.addUserToGroups);
+groupRouter.patch('/:idGroup/image', upload.single('image'), GroupController.addImageGroup);
 
 module.exports = groupRouter;

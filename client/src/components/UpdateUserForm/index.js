@@ -3,7 +3,10 @@ import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateUser } from '../../store/usersSlice';
 import { UPDATE_SCHEMA } from '../../utils/validationSchemas';
+import { REQUEST_DATA } from '../../constants';
 import styles from './UpdateUserForm.module.scss';
+
+const { PORT_CLIENT, HOST } = REQUEST_DATA;
 
 const UpdateUserForm = (props) => {
   const { idUser, setActive } = props;
@@ -15,7 +18,7 @@ const UpdateUserForm = (props) => {
     setActive(false);
     dispatch(updateUser({ values, idUser }));
     formikBag.resetForm();
-    window.location.replace(`http://localhost:5000/users/${idUser}`);
+    window.location.replace(`${HOST}:${PORT_CLIENT}/users/${idUser}`);
   };
   const initialValues = {
     firstName: `${firstName}`,

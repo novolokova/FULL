@@ -35,7 +35,6 @@ const usersSlice = createSlice({
     currentUser: null,
   },
 
-  //****** getAllUsers ************ */
   extraReducers: (builder) => {
     builder.addCase(getAllUsers.pending, pendingReducer);
     builder.addCase(getAllUsers.fulfilled, (state, action) => {
@@ -50,7 +49,6 @@ const usersSlice = createSlice({
     });
     builder.addCase(getAllUsers.rejected, rejectedReducer);
 
-    //****** getAllUsersMore ************ */
     builder.addCase(getAllUsersMore.pending, pendingReducer);
     builder.addCase(getAllUsersMore.fulfilled, (state, action) => {
       const {
@@ -64,7 +62,6 @@ const usersSlice = createSlice({
     });
     builder.addCase(getAllUsersMore.rejected, rejectedReducer);
 
-    //*****  createUser  ****** */
     builder.addCase(createUser.pending, pendingReducer);
     builder.addCase(createUser.fulfilled, (state, action) => {
       const {
@@ -78,7 +75,6 @@ const usersSlice = createSlice({
     });
     builder.addCase(createUser.rejected, rejectedReducer);
 
-    // ***************getOneUser***********************
     builder.addCase(getOneUser.pending, pendingReducer);
     builder.addCase(getOneUser.fulfilled, (state, action) => {
       const {
@@ -92,7 +88,6 @@ const usersSlice = createSlice({
     });
     builder.addCase(getOneUser.rejected, rejectedReducer);
 
-    //****** updateUser ************ */
     builder.addCase(updateUser.pending, pendingReducer);
     builder.addCase(updateUser.fulfilled, (state, action) => {
       const {
@@ -107,7 +102,6 @@ const usersSlice = createSlice({
     });
     builder.addCase(updateUser.rejected, rejectedReducer);
 
-    //****** deleteUser ************ */
     builder.addCase(deleteUser.pending, pendingReducer);
     builder.addCase(deleteUser.fulfilled, (state, action) => {
       const {
@@ -117,10 +111,6 @@ const usersSlice = createSlice({
       } = action;
       state.error = null;
       state.isFetching = false;
-      //1 variant
-      //  state.users.splice(data.id, 1);
-
-      //2 variant
       state.users = state.users.filter((user) => user._id !== data._id);
     });
     builder.addCase(deleteUser.rejected, rejectedReducer);

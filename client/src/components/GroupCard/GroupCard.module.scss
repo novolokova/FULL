@@ -18,7 +18,7 @@
     height: 130px;
     margin: auto;
     margin-top: 15px;
-    border: 2px solid color.$color-black;
+    @include mixin.border-style(2px, color.$color-black, solid);
     border-radius: border.$b-Radius-15;
   }
   .image {

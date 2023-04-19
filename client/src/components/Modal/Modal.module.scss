@@ -1,3 +1,5 @@
+@use 'src/common/styles/colors' as color;
+
 .modal {
     height: 100vh;
     width: 100vw;
@@ -22,7 +24,7 @@
     width: 50vw;
     padding: 1rem;
     border-radius: 12px;
-    background-color: white;
+    background-color:color.$color-white;
     transform: scale(0.5);
     transition: 0.5s all;
 

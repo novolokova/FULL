@@ -47,7 +47,7 @@ export const postGroup = (values) => {
     headers: { 'Content-Type': 'multipart/form-data' },
   });
 };
-export const getAllGroups = (idUser) => httpClient.get('/groups');
+export const getAllGroups = () => httpClient.get('/groups');
 export const getUserGroups = (idUser) =>
   httpClient.get(`/groups/users/${idUser}`);
 export const addUserToGroups = ({ idGroup, values }) =>

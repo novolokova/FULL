@@ -2,8 +2,8 @@ import React from 'react';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { useDispatch } from 'react-redux';
 import { createGroup } from '../../store/groupsSlice';
-import styles from './GroupForm.module.scss';
 import { GROUP_SCHEMA } from '../../utils/validationSchemas';
+import styles from './GroupForm.module.scss';
 
 const GroupForm = (props) => {
   const { setActive } = props;
