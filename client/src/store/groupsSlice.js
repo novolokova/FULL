@@ -18,6 +18,10 @@ export const addUserToGroups = decarateAsyncThunk({
   type: 'groups/addUserToGroups',
   thunk: httpClient.addUserToGroups,
 });
+export const urdateGroup = decarateAsyncThunk({
+  type: 'groups/urdateGroup',
+  thunk: httpClient.urdateGroup,
+});
 
 const groupsSlice = createSlice({
   name: 'groups',
@@ -80,6 +84,20 @@ const groupsSlice = createSlice({
       state.groupsUser = data;
     });
     builder.addCase(getUserGroups.rejected, rejectedReducer);
+
+    builder.addCase(urdateGroup.pending, pendingReducer);
+    builder.addCase(urdateGroup.fulfilled, (state, action) => {
+      const {
+        payload: {
+          data: { data },
+        },
+      } = action;
+      state.error = null;
+      state.isFetching = false;
+      const index = state.groups.findIndex((group) => group._id === data._id);
+      state.groups[index] = data;
+    });
+    builder.addCase(urdateGroup.rejected, rejectedReducer);
   },
 });
 

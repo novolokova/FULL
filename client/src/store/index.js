@@ -6,7 +6,7 @@ const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
-        ignoredActions: ['users/getAllUsers/fulfilled', 'users/getAllUsersMore/fulfilled', 'users/getOneUser/fulfilled', 'users/createUser/fulfilled','users/patchUser/fulfilled', 'users/deleteUser/fulfilled', 'tasks/getAllTasks/fulfilled', 'tasks/getOneTask/fulfilled', 'users/updateTask/fulfilled', 'tasks/getUserTasks/fulfilled', 'tasks/deleteTask/fulfilled', 'users/getUserGroups/fulfilled','users/getAllGroups/fulfilled' ],
+        ignoredActions: ['users/getAllUsers/fulfilled', 'users/getAllUsersMore/fulfilled', 'users/getOneUser/fulfilled', 'users/createUser/fulfilled','users/patchUser/fulfilled', 'users/deleteUser/fulfilled', 'tasks/getAllTasks/fulfilled', 'tasks/getOneTask/fulfilled', 'users/updateTask/fulfilled', 'tasks/getUserTasks/fulfilled', 'tasks/deleteTask/fulfilled', 'users/getUserGroups/fulfilled','users/getAllGroups/fulfilled', 'groups/urdateGroup/fulfilled' ],
         ignoredActionPaths: ['meta.arg', 'payload.timestamp'],
         ignoredPaths: ['items.dates'],
       },

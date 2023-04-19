@@ -5,7 +5,7 @@ export const NAME_SCHEMA = Yup.string()
   .matches(/^[A-Z]/, 'Must be first capital letter')
   .min(2, 'Must be more 2 letters')
   .max(16, 'Must be less 16 letters')
-  .matches(/[a-z]{4,15}$/, 'Must be only one capital letter or latin letters')
+  .matches(/[a-z]{3,15}$/, 'Must be only one capital letter or latin letters')
   .required('Required field');
 
 export const CONTENT_SCHEMA = Yup.object({
@@ -18,6 +18,11 @@ export const CONTENT_SCHEMA = Yup.object({
 
 export const GROUP_SCHEMA = Yup.object({
   name: NAME_SCHEMA,
+});
+
+export const UPDATE_GROUP_SCHEMA = Yup.object({
+  name: NAME_SCHEMA,
+  descriptition: CONTENT_SCHEMA
 });
 
 export const EMAIL_SCHEMA = Yup.string()

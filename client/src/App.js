@@ -11,6 +11,7 @@ import UpdateTaskForm from './components/UpdateTaskForm';
 import UsersTasksList from './components/UsersTasksList';
 import TaskFullCard from './components/TaskFullCard';
 import UserGroups from './components/UserGroups';
+import UrdateGroupForm from './components/UrdateGroupForm';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
 
         <Route path="/groups" element={<GroupPage />} />
         <Route path="/groups/users/:idUser" element={<UserGroups />} />
+        <Route path="/groups/:idGroup/image" element={<UrdateGroupForm/>} />
       </Routes>
     </BrowserRouter>
   );

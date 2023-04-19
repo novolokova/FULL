@@ -48,7 +48,15 @@ export const postGroup = (values) => {
   });
 };
 export const getAllGroups = () => httpClient.get('/groups');
-export const getUserGroups = (idUser) =>
-  httpClient.get(`/groups/users/${idUser}`);
-export const addUserToGroups = ({ idGroup, values }) =>
-  httpClient.post(`/groups/${idGroup}`, values);
+export const getUserGroups = (idUser) => httpClient.get(`/groups/users/${idUser}`);
+export const addUserToGroups = ({ idGroup, values }) => httpClient.post(`/groups/${idGroup}`, values);
+export const urdateGroup = ({ idGroup, values }) => {
+  const formDataValues = new FormData();
+  formDataValues.append('name', values.name);
+  formDataValues.append('image', values.image);
+  formDataValues.append('descriptition', values.descriptition);
+  return httpClient.patch(`/groups/${idGroup}/image`, formDataValues, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
+};
+
