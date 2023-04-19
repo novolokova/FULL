@@ -1,11 +1,11 @@
 import React from 'react';
+import { FamilyRestroom, DriveFileRenameOutline, NoAdultContent, PersonAdd } from '@mui/icons-material';
 import { useState } from 'react';
-import { FamilyRestroom, NoAdultContent, PersonAdd } from '@mui/icons-material';
+import { Link } from 'react-router-dom';
 import Modal from '../Modal';
 import AddToGroupForm from '../AddToGroupForm';
 import { REQUEST_DATA } from '../../constants';
 import styles from './GroupCard.module.scss';
-
 const { PORT_SERVER, HOST } = REQUEST_DATA;
 
 const GroupCard = (props) => {
@@ -14,6 +14,7 @@ const GroupCard = (props) => {
     i,
   } = props;
   const [modalActive, setModalActive] = useState(false);
+
   return (
     <>
       <div key={i} className={styles.card}>
@@ -36,6 +37,9 @@ const GroupCard = (props) => {
             <button onClick={() => setModalActive(true)} className={styles.btn}>
               <PersonAdd />
             </button>
+            <Link to={`/groups/${id}/image`} className={styles.btn}>
+                <DriveFileRenameOutline />
+              </Link>
           </div>
         </div>
       </div>

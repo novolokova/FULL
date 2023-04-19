@@ -9,7 +9,6 @@ import styles from './SearchForm.module.scss';
 const initialValues = {
   idUser: '',
 };
-
 const SearchForm = (props) => {
   const [modalActive, setModalActive] = useState(false);
   const navigate = useNavigate();

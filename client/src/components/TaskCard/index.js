@@ -13,7 +13,6 @@ import { deleteTask } from '../../store/tasksSlice';
 import Modal from '../Modal';
 import { REQUEST_DATA } from '../../constants';
 import styles from './TaskCard.module.scss';
-
 const { PORT_CLIENT, HOST } = REQUEST_DATA;
 
 const TaskCard = (props) => {

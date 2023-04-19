@@ -1,7 +1,30 @@
 @use "src/common/styles/colors" as color;
+@use "src/common/styles/borders" as border;
 
   .spanError{
     color: color.$error-color;
-    
   }
-  //  @use 'src/common/styles/templates' as *; 
+
+  .fields {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    margin: auto;
+    margin-top: 15px;
+  }
+
+  .field {
+    padding: 5px;
+    margin: 5px 0;
+    border-radius: border.$b-Radius-5;
+  }
+
+  .submit {
+    padding: 7px;
+    margin: 10px 0;
+    border-radius: border.$b-Radius-5;
+    color: color.$color-white;
+    font-weight: 600;
+    background-color: color.$color-medium-blue;
+    text-transform: uppercase;
+  }

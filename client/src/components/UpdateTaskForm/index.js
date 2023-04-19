@@ -3,8 +3,8 @@ import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { updateTask } from '../../store/tasksSlice';
-import styles from './UpdateTaskForm.module.scss';
 import { CONTENT_SCHEMA } from '../../utils/validationSchemas';
+import styles from './UpdateTaskForm.module.scss';
 
 const initialValues = {
   content: '',

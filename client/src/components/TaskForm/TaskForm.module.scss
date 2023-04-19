@@ -16,27 +16,16 @@
 }
 
 .fields {
-  display: flex;
-  flex-direction: column;
-  width: 400px;
-  margin: auto;
-  margin-top: 30px;
+  @extend .fields;
 }
 
 .field {
-  padding: 5px;
-  margin: 5px 0;
-  border-radius: border.$b-Radius-5;
+  @extend .field;
 }
 
 .submit {
-  padding: 7px;
-  margin: 10px 0;
-  border-radius: border.$b-Radius-5;
-  font-weight: 600;
-  color: color.$color-white;
+  @extend .submit;
   background-color: color.$color-teal;
-  text-transform: uppercase;
 }
 
 .spanError {

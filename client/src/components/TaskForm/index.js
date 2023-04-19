@@ -5,8 +5,11 @@ import { createTask } from '../../store/tasksSlice';
 import { CONTENT_SCHEMA } from '../../utils/validationSchemas';
 import { REQUEST_DATA } from '../../constants';
 import styles from './TaskForm.module.scss';
-
 const { PORT_CLIENT, HOST } = REQUEST_DATA;
+
+const initialValues = {
+  content: '',
+};
 
 const TaskForm = (props) => {
   const { idUser, setActive } = props;
@@ -16,9 +19,6 @@ const TaskForm = (props) => {
     setActive(false);
     formikBag.resetForm();
     window.location.replace(`${HOST}:${PORT_CLIENT}/tasks/users/${idUser}`);
-  };
-  const initialValues = {
-    content: '',
   };
   return (
     <section className={styles.container}>
